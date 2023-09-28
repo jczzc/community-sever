@@ -327,7 +327,7 @@ def handler(c,addr):
         except Exception as e:
           traceback.print_exc()
           lock.release()
-        print(bbs)
+        #print(bbs)
       else:
         c.send('F'.encode())
         c.close()
@@ -355,7 +355,7 @@ def handler(c,addr):
           bbs_list=[bbs[0],]
         else:
           bbs_list=bbs[client_pointer:0:-1]
-        print(bbs_list)
+        #print(bbs_list)
         encoded_bbs_list=pickle.dumps(bbs_list)
         encrypted_bbs_list_len,encrypted_bbs_list=split(encoded_bbs_list,client_public_key)
         c.send(encrypted_bbs_list_len)
@@ -701,7 +701,11 @@ def main():
   s1=socket.socket()
   s1.bind(('127.0.0.1',2048))
   s1.listen(100)
+  s2=socket.socket()
+  s2.bind((socket.gethostbyname(socket.gethostname()),3096))
+  s2.listen(100)
   a=_thread.start_new_thread(sever,(s,))
   b=_thread.start_new_thread(sever,(s1,))
+  c=_thread.start_new_thread(sever,(s2,))
   manager=_thread.start_new_thread(waiters_manager,())
   while True:pass

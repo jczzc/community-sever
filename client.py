@@ -46,7 +46,7 @@ def main():
     if usrname==b'':
       con1=True
       while con1:
-        print('please enter your usrname')
+        print('please enter your usrname,as your UNIQUE document to sign in')
         usrname=input('usrname:').encode()
         s=socket.socket(ip,pro)
         s.connect((ser_name,int(ser_port)))
@@ -118,6 +118,8 @@ def main():
       traceback.print_exc()
       time.sleep(2)
   print('login_end')
+  time.sleep(0.5)
+  os.system('cls')
   while True:
     #command=input('command:')
     try:
@@ -304,6 +306,7 @@ def main():
         print(s.recv(1).decode())
         print('exited room')
       elif command=='exit':
+        os.system('cls')
         break
       elif command=='cls':
         os.system('cls')
@@ -741,5 +744,6 @@ def main():
             break
     except:
       #print(e)
+      os.system('cls')
       traceback.print_exc()
       time.sleep(2)
